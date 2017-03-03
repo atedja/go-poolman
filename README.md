@@ -40,6 +40,7 @@ func main() {
 }
 ```
 
+#### [Full API Documentation](https://godoc.org/github.com/atedja/go-poolman)
 
 ### Basic Usage
 
@@ -122,6 +123,3 @@ Then just execute your functions directly. You do not need Poolman for that.
 #### How do I get the return value from the asynchronous tasks?
 
 Use channels, as demonstrated in the above example.
-  
-
-#### [Full API Documentation](https://godoc.org/github.com/atedja/go-poolman)
