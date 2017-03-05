@@ -54,7 +54,7 @@ Poolman comes with a basic Poolman `Default`, as shown in the example above. The
 #### Add an asynchronous task
 
     pm := poolman.New(4, 16)
-    poolman.Default.AddTask(func(params ...interface{}) {
+    pm.AddTask(func(params ...interface{}) {
       job := params[0].(string)
       jv := params[1].(int)
       fmt.Println("Long running task:", job)
@@ -65,7 +65,6 @@ Poolman comes with a basic Poolman `Default`, as shown in the example above. The
 
 #### Resize Number of Workers
 
-    pm := poolman.New(4, 16)
     pm.Resize(8)
 
 If new size is larger, Poolman will allocate more workers leaving the currently running workers, and the queue, untouched.
@@ -100,7 +99,7 @@ The following is an example of how to implement an asynchronous task with timeou
     ctx, cancelFn := context.WithTimeout(context.Background(), 5 * time.Second)
     defer cancelFn()
     
-    Default.AddTask(func(params ...interface{}) {
+    pm.AddTask(func(params ...interface{}) {
       ctx := params[0].(context.Context)
       done := params[1].(chan bool)
       select {
