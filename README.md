@@ -1,5 +1,7 @@
 # Poolman
 
+[![Build Status](https://travis-ci.org/atedja/go-poolman.svg?branch=master)](https://travis-ci.org/atedja/go-poolman)
+
 Poolman is a goroutine pool manager to manage your asynchronous tasks.
 It is a simple library meant to control the number of background workers.
 
