@@ -49,13 +49,13 @@ func main() {
 #### Creating a Poolman
 
     var pm *poolman.Poolman
-    pm = poolman.New(8, 16) // Create 8 background workers and a queue of size 16
+    pm, _ = poolman.New(8, 16) // Create 8 background workers and a queue of size 16
 
 Poolman comes with a basic Poolman `Default`, as shown in the example above. The default Poolman has numbers of workers equals to the value returned by `runtime.NumCPU()`.
 
 #### Add an asynchronous task
 
-    pm := poolman.New(4, 16)
+    pm, _ := poolman.New(4, 16)
     pm.AddTask(func(params ...interface{}) {
       job := params[0].(string)
       jv := params[1].(int)
@@ -96,7 +96,7 @@ without potentially exposing yourself to memory leaks and hidden bugs.
 
 The following is an example of how to implement an asynchronous task with timeout.
 
-    pm := poolman.New(4, 16)
+    pm, _ := poolman.New(4, 16)
     done := make(chan bool)
     ctx, cancelFn := context.WithTimeout(context.Background(), 5 * time.Second)
     defer cancelFn()
