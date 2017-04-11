@@ -98,12 +98,12 @@ The following is an example of how to implement an asynchronous task with timeou
 
     pm, _ := poolman.New(4, 16)
     done := make(chan bool)
-    ctx, cancelFn := context.WithTimeout(context.Background(), 5 * time.Second)
-    defer cancelFn()
     
-    pm.AddTask(func(params ...interface{}) {
-      ctx := params[0].(context.Context)
-      done := params[1].(chan bool)
+    pm.AddTask(func(params interface{}) {
+      done := params.(chan bool)
+      ctx, cancelFn := context.WithTimeout(context.Background(), 5 * time.Second)
+      defer cancelFn()
+
       select {
       case <-time.After(10 * time.Second):
         fmt.Println("Job's done!")
@@ -111,9 +111,8 @@ The following is an example of how to implement an asynchronous task with timeou
       case <-ctx.Done():
         fmt.Println("Timeout!")
         done <- false
-        return
       }
-    }, ctx, done)
+    }, done)
     
     result := <-done
 
